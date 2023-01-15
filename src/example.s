@@ -1,27 +1,27 @@
-.type unit   # This sets the type of the program to unit, other possible types are `building` and `overseer`
-.cpu pu24	 # Set the cpu where this will run, this decides the amount of stack, IO ports and processing speed.
+.TYPE unit   # This sets the type of the program to unit, other possible types are `building` and `overseer`
+.CPU pu24	 # Set the cpu where this will run, this decides the amount of stack, IO ports and processing speed.
 
 # Interactive var sets a variable type that will be exposed in the UI
 # The maximum amount of interactive vars are set by the cpu type.
-.interactive_var mode options [:peaceful, :aggressive] = :peaceful
-.interactive_var retreat bool = false
+.INTERACTIVE_VAR mode options [:peaceful, :aggressive] = :peaceful
+.INTERACTIVE_VAR retreat bool = false
 
 # Attached modules to the system, this will allow you to interact with the world
 # In this case this is a input module, which means that it allows you to see
 # around you.
-.module *visual visio10
-# In this case we append a MOTIONv2 module, which will allow us to move
-.module *motor MOTIONv2
-# In this case we append an attack module, a ranged attack module
-.module *weapon ARCHERmk2
+.MODULE *visual visio10
+# In this case we append a MOTIONv2 MODULE, which will allow us to move
+.MODULE *motor MOTIONv2
+# In this case we append an attack MODULE, a ranged attack module
+.MODULE *weapon ARCHERmk2
 # In this case it's to be able to communicate with other units
-.module *antenna COMMSmk2
+.MODULE *antenna COMMSmk2
 
 # Constant definition
-.define visio10_scan_around 0x01
-.define MOTIONv2_current_target 0x00
-.define MOTIONv2_goto 0x01
-.define antenna_broadcast 0x00
+.DEFINE visio10_scan_around 0x01
+.DEFINE MOTIONv2_current_target 0x00
+.DEFINE MOTIONv2_goto 0x01
+.DEFINE antenna_broadcast 0x00
 
 # This is a variable length instruction set
 

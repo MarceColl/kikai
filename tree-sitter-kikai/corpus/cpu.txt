@@ -1,0 +1,10 @@
+===
+CPU
+===
+
+.cpu pu24
+
+---
+
+(source_file
+	(cpu))

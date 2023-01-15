@@ -1,0 +1,24 @@
+======
+Module
+======
+
+.module *vision visio10
+.module *motor MOTIONv2
+.module *weapon ARCHERmk2
+.module *antenna COMMSmk2
+
+---
+
+(source_file
+	(module
+		(module_target)
+		(hardware_name))
+	(module
+		(module_target)
+		(hardware_name))
+	(module
+		(module_target)
+		(hardware_name))
+	(module
+		(module_target)
+		(hardware_name)))

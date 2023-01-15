@@ -1,0 +1,13 @@
+====================
+Interactive variable
+====================
+
+.interactive_var name1 bool = false
+.interactive_var name1 bool = true
+.interactive_var name1 options [:one, :two, :three] = :two
+
+---
+
+(source_file
+	(interactive_var
+		

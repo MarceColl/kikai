@@ -1,0 +1,12 @@
+==================================
+Define declaration with identifier 
+==================================
+
+.define name success
+
+---
+
+(source_file
+	(define
+		(identifier)
+		(identifier)))

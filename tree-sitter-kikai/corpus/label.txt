@@ -1,0 +1,10 @@
+=====
+Label
+=====
+
+@label:
+
+---
+
+(source_file
+	(label))

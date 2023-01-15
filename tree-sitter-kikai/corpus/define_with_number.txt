@@ -1,0 +1,12 @@
+==============================
+Define declaration with number
+==============================
+
+.define name 1
+
+---
+
+(source_file
+	(define
+		(identifier)
+		(number)))

@@ -1,0 +1,14 @@
+====
+Type
+====
+
+.type unit
+.type building
+.type overseer
+
+---
+
+(source_file
+	(type)
+	(type)
+	(type))

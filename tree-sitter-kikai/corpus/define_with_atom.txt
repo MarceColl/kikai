@@ -1,0 +1,12 @@
+=============================
+Define declaration with atom 
+=============================
+
+.define name :success
+
+---
+
+(source_file
+	(define
+		(identifier)
+		(atom)))

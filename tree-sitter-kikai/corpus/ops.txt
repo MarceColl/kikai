@@ -1,0 +1,39 @@
+===
+OPs
+===
+
+
+POP
+UPOP
+UVECSUBS
+UVECADDS
+UDISTS
+PUSH 1
+PUSH :success
+PUSH holi
+JMP @label
+JLE @label
+JL @label
+JGE @label
+JG @label
+TRIGGER *vision
+
+
+---
+
+
+(source_file
+	(op)
+	(op)
+	(op)
+	(op)
+	(op)
+	(op (number))
+	(op (atom))
+	(op (identifier))
+	(op (label_target))
+	(op (label_target))
+	(op (label_target))
+	(op (label_target))
+	(op (label_target))
+	(op (module_target)))

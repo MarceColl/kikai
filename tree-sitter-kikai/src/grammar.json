@@ -1,0 +1,391 @@
+{
+  "name": "kikai",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_definition"
+      }
+    },
+    "_definition": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "op"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "module"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "interactive_var"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cpu"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "label"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        }
+      ]
+    },
+    "define": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".define"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_constant"
+        }
+      ]
+    },
+    "label_target": {
+      "type": "PATTERN",
+      "value": "@[a-zA-Z_]+"
+    },
+    "label": {
+      "type": "PATTERN",
+      "value": "@[a-zA-Z_]+:"
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]+"
+    },
+    "_constant": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "atom"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "module_target": {
+      "type": "PATTERN",
+      "value": "\\*[a-zA-Z_]+"
+    },
+    "module": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".module"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "module_target"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hardware_name"
+        }
+      ]
+    },
+    "number": {
+      "type": "PATTERN",
+      "value": "[0-9]+"
+    },
+    "atom": {
+      "type": "PATTERN",
+      "value": ":[a-zA-Z_]+"
+    },
+    "op": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "POP"
+        },
+        {
+          "type": "STRING",
+          "value": "UPOP"
+        },
+        {
+          "type": "STRING",
+          "value": "UVECSUBS"
+        },
+        {
+          "type": "STRING",
+          "value": "UVECADDS"
+        },
+        {
+          "type": "STRING",
+          "value": "UDISTS"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "PUSH"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_constant"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "JMP"
+                },
+                {
+                  "type": "STRING",
+                  "value": "JLE"
+                },
+                {
+                  "type": "STRING",
+                  "value": "JL"
+                },
+                {
+                  "type": "STRING",
+                  "value": "JGE"
+                },
+                {
+                  "type": "STRING",
+                  "value": "JG"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "label_target"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "TRIGGER"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "module_target"
+            }
+          ]
+        }
+      ]
+    },
+    "hardware_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "visio10"
+        },
+        {
+          "type": "STRING",
+          "value": "MOTIONv2"
+        },
+        {
+          "type": "STRING",
+          "value": "ARCHERmk2"
+        },
+        {
+          "type": "STRING",
+          "value": "COMMSmk2"
+        }
+      ]
+    },
+    "type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "unit"
+            },
+            {
+              "type": "STRING",
+              "value": "building"
+            },
+            {
+              "type": "STRING",
+              "value": "overseer"
+            }
+          ]
+        }
+      ]
+    },
+    "cpu": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".cpu"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "pu24"
+            }
+          ]
+        }
+      ]
+    },
+    "interactive_var": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".interactive_var"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ivar_type"
+        }
+      ]
+    },
+    "ivar_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_ivar_bool_def"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ivar_options_def"
+        }
+      ]
+    },
+    "_ivar_bool_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "true"
+            },
+            {
+              "type": "STRING",
+              "value": "false"
+            }
+          ]
+        }
+      ]
+    },
+    "_ivar_options_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "options"
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "atom"
+              },
+              {
+                "type": "STRING",
+                "value": ","
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "atom"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "atom"
+        }
+      ]
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": "#.*\\n"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+

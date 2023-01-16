@@ -1,52 +1,57 @@
+use64
+format ELF64 executable
 
-stack:		dw 206 dup 0
-unit_stack:	dw 1000 dup 0
+entry vm_start
 
-mode: 		db 0
+include 'kikai_macros.inc'
 
-macro YIELD
-	; Return to the main coroutine to check time limits
-end macro
+DSTACK 400
+USTACK 1000
 
-macro PUSH number
-	push number
-	inc rax
-end macro
+mode: 		dw 0
+health:		dw 100
 
-macro LOAD target
-	push target
-	inc rax
-end macro
+; The _co variables hold the data saved
+struct co_data
+	.rsp	dq 0
+	.rax	dq 0
+	.rbx	dq 0
+	.rip	dq 0
+ends
 
-macro UDISTS
-	inc rax
-end macro
+_co_data: dup 6 co_data
 
-macro UVECSUBS
-	inc rax
-end macro
+_co_rsp:    dq 0	; stack pointer
+_co_rax:	dq 0
+_co_rbx:    dq 0
+_co_rip:	dq 0
 
-macro JMP target
-	jmp target
-	inc rax
-end macro
-	
-
-_start:
-	mov rsp, stack  ; set the stack
-	xor rax, rax	; rax will be used as a counter for instructions executed
+_co_start:
+	mov rsp, rax * 30 ; set the stack
+	xor rax, rax	  ; eax will be used as a counter for instructions executed
 main:
-	PUSH 0x01	; visio10_scan_around
-	YIELD		; this basically yields
+	CHECK_LIMITS
+	PUSH 0x01
+l01:
+	CHECK_LIMITS
+	PUSH 0x01
+	ADD
+	JMP l01
 
-	PUSH 0x01	; :aggressive
-	LOAD mode
-	JE loop_aggressive
-loop_aggressive:
-	UDISTS
-	PUSH 10
-	JLE unit_too_close
-unit_too_close:
-	UVECSUBS
-	PUSH 0x00
+vm_start:         ; Main VM start
+	xor rax, rax
+	mov QWORD [_co_rip], _co_start
+	mov QWORD [_co_rsp], rsp
+	YIELD
+vm_loop:
+	inc rax
+	cmp rax, 5
+	jge vm_exit
+	YIELD
+	jmp vm_loop
+
+vm_exit:
+	mov rbx, rax
+	mov rax, 60
+	syscall
 

@@ -28,7 +28,7 @@ after_yield:
 
 macro CHECK_LIMITS {
 	local no_yield
-	cmp rax, 100 
+	cmp rax, 1000000
 	jl no_yield
 	YIELD 
 no_yield:

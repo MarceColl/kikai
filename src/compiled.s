@@ -47,14 +47,19 @@ init_co_loop:
 	cmp rax, 10
 	jl init_co_loop
 co_initialized:
-	mov QWORD rcx, _co_data
-	xor rax, rax
+	xor rbx, rbx
 vm_loop:
+	cmp rbx, 10000
+	jge vm_exit
+	xor rax, rax
+	mov QWORD rcx, _co_data
+vm_loop_inner:
 	YIELD
 	inc rax
-	cmp rax, 10
 	add rcx, 32
-	jge vm_exit
+	cmp rax, 10
+	jl vm_loop_inner
+	inc rbx
 	jmp vm_loop
 
 vm_exit:

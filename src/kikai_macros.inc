@@ -11,24 +11,24 @@ struc UNIT {
 	.player db
 }
 
-macro YIELD {
+macro YIELD co_idx {
 	local next_inst, after_yield
 	; yield to the main thread
-	xchg rsp, QWORD [_co_rsp]
-	xchg rax, QWORD [_co_rax]
-	xchg rbx, QWORD [_co_rbx]
-	push QWORD [_co_rip]	
+	xchg rsp, QWORD [rcx]
+	xchg rax, QWORD [rcx + 8]
+	xchg rbx, QWORD [rcx + 16]
+	push QWORD [rcx + 24]	
 	call next_inst
 next_inst:
-	pop QWORD [_co_rip]
-	add QWORD [_co_rip], (after_yield - next_inst)
+	pop QWORD [rcx + 24]
+	add QWORD [rcx + 24], (after_yield - next_inst)
 	ret
 after_yield:
 }
 
 macro CHECK_LIMITS {
 	local no_yield
-	cmp rax, 5
+	cmp rax, 100 
 	jl no_yield
 	YIELD 
 no_yield:
